@@ -19,13 +19,14 @@ s_date_col, e_date_col = st.columns(2)
 start_date = s_date_col.date_input("Start Date")
 end_date = e_date_col.date_input("End Date")
 
-billing = st.selectbox("Billing", options=["Yearly", "Half Yearly", "Quarterly", "Monthly"])
+billing_col, upload_col = st.columns(2)
+billing = billing_col.selectbox("Billing", options=["Yearly", "Half Yearly", "Quarterly", "Monthly"])
+
+uploaded_file = upload_col.file_uploader("Upload File")
 
 if st.button("Save"):
-    
     start_date_str = start_date.strftime('%Y-%m-%d')
     end_date_str = end_date.strftime('%Y-%m-%d')
-    
 
     new_entry = pd.DataFrame({
         "client_name": [client_name],
@@ -37,7 +38,6 @@ if st.button("Save"):
         "e_date": [end_date_str],
         "billing": [billing]
     })
-    
 
     st.session_state['data'] = pd.concat([st.session_state['data'], new_entry], ignore_index=True)
     st.success("Data saved!")
