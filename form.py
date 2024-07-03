@@ -49,7 +49,6 @@ if not st.session_state['data'].empty:
 def convert_df(df):
     return df.to_csv(index=False).encode('utf-8')
 
-# Button to download the data
 if not st.session_state['data'].empty:
     csv = convert_df(st.session_state['data'])
     st.download_button(
