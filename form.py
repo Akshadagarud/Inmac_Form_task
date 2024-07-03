@@ -23,14 +23,14 @@ billing = st.selectbox("Billing", options=["Yearly", "Half Yearly", "Quarterly",
 
 if st.button("Save"):
     new_entry = pd.DataFrame({
-        "client_name": [client_name],
-        "amcfms": [amcfms],
-        "type": [type],
-        "note": [note],
-        "total_amount": [total_amount],
-        "s_date": [s_date],
-        "e_date": [e_date],
-        "billing": [billing]
+        "client_name": client_name,
+        "amcfms": amcfms,
+        "type": type,
+        "note": note,
+        "total_amount": total_amount,
+        "s_date": s_date,
+        "e_date": e_date,
+        "billing": billing
     })
     
     st.session_state['data'] = pd.concat([st.session_state['data'], new_entry], ignore_index=True)
