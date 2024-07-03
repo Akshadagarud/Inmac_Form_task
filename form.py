@@ -1,13 +1,11 @@
 import streamlit as st
 import pandas as pd
 
-# Initialize the session state data
 if 'data' not in st.session_state:
     st.session_state['data'] = pd.DataFrame(columns=["client_name", "amcfms", "type", "note", "total_amount", "s_date", "e_date", "billing"])
 
 st.header("Save AMC")
 
-# Collect form inputs
 client_name = st.text_input("Client Name")
 
 amcfms_col, type_col = st.columns(2)
@@ -23,13 +21,12 @@ end_date = e_date_col.date_input("End Date")
 
 billing = st.selectbox("Billing", options=["Yearly", "Half Yearly", "Quarterly", "Monthly"])
 
-# Save button logic
 if st.button("Save"):
-    # Convert dates to string
+    
     start_date_str = start_date.strftime('%Y-%m-%d')
     end_date_str = end_date.strftime('%Y-%m-%d')
     
-    # Create new entry as a DataFrame with a single row
+
     new_entry = pd.DataFrame({
         "client_name": [client_name],
         "amcfms": [selected_amcfms],
@@ -41,16 +38,14 @@ if st.button("Save"):
         "billing": [billing]
     })
     
-    # Append new entry to the session state DataFrame
+
     st.session_state['data'] = pd.concat([st.session_state['data'], new_entry], ignore_index=True)
     st.success("Data saved!")
 
-# Display the table if there is any data
 if not st.session_state['data'].empty:
     st.write("### Saved Data")
     st.dataframe(st.session_state['data'])
 
-# Function to convert DataFrame to CSV
 def convert_df(df):
     return df.to_csv(index=False).encode('utf-8')
 
