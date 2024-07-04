@@ -4,7 +4,7 @@ import pandas as pd
 if 'data' not in st.session_state:
     st.session_state['data'] = pd.DataFrame(columns=["client_name", "amcfms", "type", "note", "total_amount", "s_date", "e_date", "billing"])
 
-st.header("Save AMC")
+st.header("Form AMC")
 
 client_name = st.text_input("Client Name")
 
